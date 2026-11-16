@@ -26,8 +26,8 @@ Tugas Mata Kuliah **Pemrograman Fungsional** — Informatika, Universitas Muhamm
 
 ```bash
 # 1. Clone repositori
-git clone <url-repositori-kelompok>
-cd <nama-folder-repositori>
+git clone https://github.com/farrelanz06/Kelompok-X_Library_PF.git
+cd Kelompok-X_Library_PF
 
 # 2. (Opsional) buat virtual environment
 python -m venv .venv
