@@ -12,10 +12,25 @@ Tugas Mata Kuliah **Pemrograman Fungsional** — Informatika, Universitas Muhamm
 
 ```
 .
-├── fplib.py         # pustaka berisi 15 fungsi
-├── test_fplib.py    # unit test pytest
-└── README.md        # dokumentasi ini
+├── app_kalkulator.py     # Kalkulator ilmiah/statistik
+├── app_kasir.py          # Aplikasi kasir kantin
+├── app_mahasiswa.py      # Pengolahan data mahasiswa
+├── app_random_guess_number.py
+├── ChatBot/
+│   ├── __init__.py
+│   ├── app.py            # Chatbot Gemini
+│   ├── test_app.py       # Tes offline chatbot Gemini
+│   ├── requirements.txt
+│   ├── .env.example
+│   └── README.md
+├── fplib.py              # Satu pustaka bersama untuk semua aplikasi
+├── test_fplib.py         # Tes pustaka
+└── README.md
 ```
+
+`ChatBot/` memakai `fplib.py` di root repositori; tidak ada salinan pustaka di
+dalam folder tersebut. Aplikasi Gemini dijalankan sebagai modul dari root
+repositori dengan `python -m ChatBot.app`.
 
 ## Persyaratan
 
@@ -38,6 +53,12 @@ pip install pytest
 
 # 4. Jalankan seluruh test
 pytest -v
+```
+
+Untuk tes fitur lokal chatbot Gemini secara terpisah:
+
+```bash
+python -m unittest ChatBot.test_app -v
 ```
 
 Untuk menjalankan test satu fungsi saja:
@@ -90,7 +111,9 @@ print(hitung_total([5_000, 20_000, 50_000]))  # Rp63.000
 
 ## Panduan Import untuk Anggota Kelompok
 
-Letakkan `fplib.py` **di folder yang sama** dengan file aplikasi Anda, lalu import:
+Simpan satu `fplib.py` di root repositori. Aplikasi di root dapat mengimpornya
+langsung; aplikasi dalam package seperti `ChatBot` dijalankan sebagai modul dari
+root agar menggunakan pustaka bersama yang sama:
 
 ```python
 # Cara 1: import seluruh modul dengan alias
@@ -109,5 +132,5 @@ Hal yang perlu diperhatikan:
 
 1. **Jangan mengubah `fplib.py` secara langsung di branch `main`.** Buat branch baru dan ajukan pull request bila ada perubahan, lalu pastikan `pytest -v` tetap lulus.
 2. **Jaga gaya fungsional:** jangan menambahkan mutasi data atau side-effect (`print`, variabel global, `list.append`, dll.) ke dalam fungsi pustaka.
-3. Bila aplikasi Anda berada di subfolder, jalankan dari root repositori atau tambahkan `fplib.py` ke `PYTHONPATH`, atau ubah folder pustaka menjadi package dengan menambahkan `__init__.py`.
+3. Jalankan aplikasi dalam subfolder sebagai modul dari root repositori, bukan dengan menyalin `fplib.py`.
 4. Setiap fungsi baru **wajib** disertai unit test di `test_fplib.py`.
